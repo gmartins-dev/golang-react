@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:latest
+    restart: unsless-stopped
+    ports:
+      - "${WEBSOCKET_DATABASE_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${WEBSOCKET_DATABASE_USER}
+      POSTGRES_PASSWORD: ${WEBSOCKET_DATABASE_PASSWORD}
+      POSTGRES_DB: ${WEBSOCKET_DATABASE_NAME}
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
